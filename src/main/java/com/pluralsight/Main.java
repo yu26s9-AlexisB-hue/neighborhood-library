@@ -1,6 +1,9 @@
 package com.pluralsight;
 import com.pluralsight.Book;
 
+import java.util.Arrays;
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args){
         Book[] books = new Book[20];
@@ -25,7 +28,9 @@ public class Main {
         numberOfBooks = 12;
         //whoCheckedOutBook( books , numberOfBooks);
         //ShowCheckedOutBooks(books, numberOfBooks, true);
-        ShowAvailableBooks(books, numberOfBooks, false);
+        //ShowAvailableBooks(books, numberOfBooks, false);
+        CheckInBook(books, numberOfBooks);
+        //whoCheckedOutBook( books , numberOfBooks);
     }
 
     private static void whoCheckedOutBook(Book[] books, int numberOfBooks){
@@ -64,5 +69,32 @@ public class Main {
             }
         }
 
+    }
+
+    private static void CheckInBook(Book[] books, int numberOfBooks){
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Please enter the ID number of the book that you would like to return: ");
+        int returnedBook = scanner.nextInt();
+        boolean found = false;
+
+        for (int i = 0; i < numberOfBooks; i++){
+            Book b = books[i];
+            if (b.getId() == returnedBook){
+                found = true;
+
+                if(!b.isCheckedOut()){
+                    System.out.print("Book is already checked in!");
+                } else{
+                    b.setCheckedOut(false);
+                    b.setCheckedOutTo("");
+                    System.out.println("Book returned successfully.");
+                }
+                return;
+            }
+
+        }
+        if (!found){
+            System.out.println("Book does not exist!");
+        }
     }
 }
