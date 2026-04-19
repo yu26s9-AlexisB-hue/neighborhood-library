@@ -6,6 +6,7 @@ public class Main {
         Book[] books = new Book[20];
 
         int numberOfBooks;
+        int command;
 
         books[0]= new Book(13447,"3354599","The Great Gatsby", true, "Jimmy Neutron");
         books[1] = new Book(13448, "7788991", "To Kill a Mockingbird", true, "Sarah Lee");
@@ -20,6 +21,48 @@ public class Main {
         books[10] = new Book(13457, "7766554", "Brave New World", false, "Morgan Hall");
         books[11] = new Book(13458, "9900112", "The Odyssey", true, "Casey Allen");
         books[12] = new Book(13459, "1237894", "Crime and Punishment", false, "Riley Scott");
+
+        numberOfBooks = 12;
+        //whoCheckedOutBook( books , numberOfBooks);
+        //ShowCheckedOutBooks(books, numberOfBooks, true);
+        ShowAvailableBooks(books, numberOfBooks, false);
+    }
+
+    private static void whoCheckedOutBook(Book[] books, int numberOfBooks){
+        for (int i = 0; i < numberOfBooks; i++){
+          Book b = books[i];
+          System.out.printf("%s \n", b.getCheckedOutTo());
+
+        }
+    }
+
+    private static void ShowAvailableBooks(Book[] books, int numberOfBooks, boolean isCheckedOut){
+        boolean found = true;
+        for (int i = 0; i < numberOfBooks; i++){
+            Book b = books[i];
+            if (b.isCheckedOut()== isCheckedOut) {
+                System.out.printf("%d %s %s \n", b.getId(), b.getIsbn(), b.getTitle());
+                found = false;
+            }
+        }
+    }
+
+    private static void ShowCheckedOutBooks(Book[] books, int numberOfBooks, boolean isCheckedOut){
+        boolean found = false;
+        for (int i = 0; i < numberOfBooks; i++){
+            Book b = books[i];
+            if (b.isCheckedOut()== isCheckedOut) {
+                System.out.printf("%d %s %s \n", b.getId(), b.getIsbn(), b.getTitle());
+                found = true;
+            }
+        }
+        if (!found){
+            if (isCheckedOut){
+                System.out.println("No books are currently checked out.");
+            } else {
+                System.out.println("No books are currently available.");
+            }
+        }
 
     }
 }
