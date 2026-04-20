@@ -26,11 +26,59 @@ public class Main {
         books[12] = new Book(13459, "1237894", "Crime and Punishment", false, "Riley Scott");
 
         numberOfBooks = 12;
+
+        Scanner scanner = new Scanner(System.in);
+        do{
+            System.out.println(" --The Store Home Screen--");
+            System.out.println("Show Available Books: Press 1 ");
+            System.out.println("Show Checked Out Books: Press 2 ");
+            System.out.println("Press 6 to exit");
+
+            command = scanner.nextInt();
+            scanner.nextLine();
+            int x = 15;
+            int c = 37;
+            switch(command){
+                case 1:
+                    ShowAvailableBooks(books, numberOfBooks, false);
+                    do{
+                        System.out.print("Would you like to check out a book?: (y/n) ");
+                        System.out.print("Would you like return to the main menu?: press x");
+                        String answer = scanner.nextLine();
+                            if (answer.equals("y")){
+                                CheckInBook(books, numberOfBooks);
+                            }else if (answer.equals("x")){
+                                break;
+                            }else{
+                                System.out.println("Thank you for your time. ");
+                            }
+
+                    }while (command != x);
+                    break;
+                case 2:
+                    ShowCheckedOutBooks(books, numberOfBooks, true);
+                    do{
+                        System.out.println("Would you like to return a book? (y/n) ");
+                        System.out.println("Would you like return to the main menu?: press x");
+                        String answer = scanner.nextLine();
+                            if (answer.equals("y")){
+                                CheckInBook(books, numberOfBooks);
+                            }else if (answer.equals("x")){
+                                break;
+                            }else{
+                                System.out.println("Thank you for your time. ");
+                            }
+
+                    }while(command != x);
+                    break;
+            }
+
+        }while (command != 6);
         //whoCheckedOutBook( books , numberOfBooks);
         //ShowCheckedOutBooks(books, numberOfBooks, true);
         //ShowAvailableBooks(books, numberOfBooks, false);
-        CheckInBook(books, numberOfBooks);
-        //whoCheckedOutBook( books , numberOfBooks);
+        //CheckInBook(books, numberOfBooks);
+
     }
 
     private static void whoCheckedOutBook(Book[] books, int numberOfBooks){
@@ -96,5 +144,9 @@ public class Main {
         if (!found){
             System.out.println("Book does not exist!");
         }
+    }
+
+    private static void checkOutBook(Book[] books, int numberOfBooks){
+
     }
 }
