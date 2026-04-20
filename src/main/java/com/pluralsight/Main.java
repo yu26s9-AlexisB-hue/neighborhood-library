@@ -27,6 +27,7 @@ public class Main {
 
         numberOfBooks = 12;
 
+        //Setting up a switch statement to handle the application.
         Scanner scanner = new Scanner(System.in);
         do{
             System.out.println(" --The Store Home Screen--");
@@ -42,11 +43,11 @@ public class Main {
                 case 1:
                     ShowAvailableBooks(books, numberOfBooks, false);
                     do{
-                        System.out.print("Would you like to check out a book?: (y/n) ");
-                        System.out.print("Would you like return to the main menu?: press x");
+                        System.out.println("Would you like to check out a book?: (y/n) ");
+                        System.out.println("Would you like return to the main menu?: press x");
                         String answer = scanner.nextLine();
                             if (answer.equals("y")){
-                                CheckInBook(books, numberOfBooks);
+                                checkOutBook(books, numberOfBooks);
                             }else if (answer.equals("x")){
                                 break;
                             }else{
@@ -74,11 +75,6 @@ public class Main {
             }
 
         }while (command != 6);
-        //whoCheckedOutBook( books , numberOfBooks);
-        //ShowCheckedOutBooks(books, numberOfBooks, true);
-        //ShowAvailableBooks(books, numberOfBooks, false);
-        //CheckInBook(books, numberOfBooks);
-
     }
 
     private static void whoCheckedOutBook(Book[] books, int numberOfBooks){
@@ -146,7 +142,36 @@ public class Main {
         }
     }
 
-    private static void checkOutBook(Book[] books, int numberOfBooks){
+    private static void checkOutBook(Book[] books, int numberOfBooks) {
+        Scanner scanner = new Scanner(System.in);
 
+        System.out.print("Please enter your name: ");
+        String userName = scanner.nextLine();
+
+        System.out.print("Type the name of the book that you would like: ");
+        String title = scanner.nextLine();
+
+        boolean found = false;
+
+        for (int i = 0; i < numberOfBooks; i++) {
+            Book b = books[i];
+
+            if (b.getTitle().equalsIgnoreCase(title)) {
+                found = true;
+
+                if (b.isCheckedOut()) {
+                    System.out.println("Book is already checked out!");
+                } else {
+                    b.setCheckedOut(true);
+                    b.setCheckedOutTo(userName);
+                    System.out.println("Enjoy your new book!");
+                }
+                return;
+            }
+        }
+
+        if (!found) {
+            System.out.println("Book does not exist!");
+        }
     }
 }
