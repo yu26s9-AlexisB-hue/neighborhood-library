@@ -1,7 +1,4 @@
 package com.pluralsight;
-import com.pluralsight.Book;
-
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -42,47 +39,42 @@ public class Main {
             switch(command){
                 case 1:
                     ShowAvailableBooks(books, numberOfBooks, false);
+                    int i = 0;
                     do{
-                        System.out.println("Would you like to check out a book?: (y/n) ");
+                        System.out.println("Would you like to check out a book?: (c) ");
                         System.out.println("Would you like return to the main menu?: press x");
                         String answer = scanner.nextLine();
-                            if (answer.equals("y")){
+                            if (answer.equals("c")){
                                 checkOutBook(books, numberOfBooks);
+
                             }else if (answer.equals("x")){
-                                break;
+                                i++;
                             }else{
-                                System.out.println("Thank you for your time. ");
+                                System.out.println("Invalid entry. ");
                             }
 
-                    }while (command != x);
+                    }while (i < 1);
                     break;
                 case 2:
                     ShowCheckedOutBooks(books, numberOfBooks, true);
+                    int r = 0;
                     do{
-                        System.out.println("Would you like to return a book? (y/n) ");
+                        System.out.println("Would you like to return a book? (c) ");
                         System.out.println("Would you like return to the main menu?: press x");
                         String answer = scanner.nextLine();
-                            if (answer.equals("y")){
+                            if (answer.equals("c")){
                                 CheckInBook(books, numberOfBooks);
                             }else if (answer.equals("x")){
-                                break;
+                                r++;
                             }else{
                                 System.out.println("Thank you for your time. ");
                             }
 
-                    }while(command != x);
+                    }while(r < 1);
                     break;
             }
 
         }while (command != 6);
-    }
-
-    private static void whoCheckedOutBook(Book[] books, int numberOfBooks){
-        for (int i = 0; i < numberOfBooks; i++){
-          Book b = books[i];
-          System.out.printf("%s \n", b.getCheckedOutTo());
-
-        }
     }
 
     private static void ShowAvailableBooks(Book[] books, int numberOfBooks, boolean isCheckedOut){
